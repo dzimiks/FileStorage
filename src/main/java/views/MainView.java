@@ -39,7 +39,7 @@ public class MainView extends JFrame {
 	}
 
 	private void init() {
-		setLookAndFeel();
+//		setLookAndFeel();
 		setLayout(null);
 		setSize(new Dimension(1200, 600));
 		setMinimumSize(new Dimension(800, 700));
@@ -54,7 +54,7 @@ public class MainView extends JFrame {
 		tfLastName = new JTextField();
 
 		path = new JTextField();
-		chooseFile = new JButton("Upload");
+		chooseFile = new JButton("Download to:");
 		path.setEditable(false);
 
 		firstName.setBounds(10, 10, 150, 25);
@@ -67,18 +67,21 @@ public class MainView extends JFrame {
 		JButton btnOk = new JButton("OK");
 		JButton btnCancel = new JButton("Cancel");
 
-		btnOk.setBounds(120, 130, 50, 25);
+		btnOk.setBounds(120, 130, 70, 25);
 		btnCancel.setBounds(180, 130, 80, 25);
 
 		fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("json, txt", "json", "txt");
 		fileChooser.setFileFilter(filter);
-
+		fileChooser.setMultiSelectionEnabled(true);
 		chooseFile.addActionListener(e -> {
 			if (fileChooser.showDialog(new JDialog(), "Choose") == JFileChooser.APPROVE_OPTION) {
 				path.setText(fileChooser.getSelectedFile().getAbsolutePath());
 				readFromFile = fileChooser.getSelectedFile();
 			}
+		});
+		btnOk.addActionListener(actionEvent -> {
+
 		});
 
 		add(firstName);

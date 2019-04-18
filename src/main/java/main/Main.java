@@ -18,7 +18,7 @@ import java.io.FileReader;
 public class Main {
 
 	public static void main(String[] args) {
-		String filename = "/Users/dzimiks/Desktop/projects/FileStorage/config.json";
+		String filename = "/home/slime/Faks/6.Semestar/SoftverskeKomponente/FileStorageApp2/FileStorage/config.json";
 		Gson gson = new Gson();
 
 		MainView view = MainView.getInstance();
@@ -32,14 +32,15 @@ public class Main {
 
 			switch (student.getImplementation()) {
 				case "local":
-					LocalDirectory ld = new LocalDirectory();
-					LocalFile lf = new LocalFile();
-
-					ld.create("UUP2018-januar", ".");
-					ld.create("grupa1", "./UUP2018-januar");
-					ld.create("grupa2", "./UUP2018-januar");
-					lf.create("file1.txt", "./UUP2018-januar/grupa1");
-					lf.create("file2.txt", "./UUP2018-januar/grupa2");
+//					LocalDirectory ld = new LocalDirectory();
+//					LocalFile lf = new LocalFile();
+//
+//					ld.create("UUP2018-januar", ".");
+//					ld.create("grupa1", "./UUP2018-januar");
+//					ld.create("grupa2", "./UUP2018-januar");
+//					lf.create("file1.txt", "./UUP2018-januar/grupa1");
+//					lf.create("file2.txt", "./UUP2018-januar/grupa2");
+					System.out.println("DSADA");
 					break;
 				case "dropbox":
 					DropboxDirectory storage = new DropboxDirectory();
