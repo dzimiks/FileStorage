@@ -40,11 +40,9 @@ public class MainView extends JFrame {
 	}
 
 	private void setLookAndFeel() {
-
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
