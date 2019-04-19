@@ -190,7 +190,7 @@ public class MainView extends JFrame {
 			}
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
-			List<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json", "zip"}, true);
+			List<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt"}, true);
 
 			for (String file : files) {
 				comboBox.addItem(file);

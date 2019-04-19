@@ -1,13 +1,19 @@
 package dialogs;
 
+import dropbox.models.DropboxDirectory;
+import exceptions.ListDirectoryException;
+import exceptions.ListFilesException;
 import listeners.DialogCancelButtonListener;
 import listeners.DownloadConfigOkButtonListener;
 import model.Student;
+import models.LocalDirectory;
 import views.MainView;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -75,10 +81,10 @@ public class DownloadConfigDialog extends JDialog {
 			}
 		});
 
-		comboBox = new JComboBox();
-
-		for (int i = 301; i < 311; i++) {
-			comboBox.addItem(i);
+		try {
+			comboBox = generateComboBox(student.getImplementation(), student.getAccessToken());
+		} catch (ListFilesException e) {
+			e.printStackTrace();
 		}
 
 		firstName.setBounds(10, 10, 150, 25);
@@ -199,5 +205,46 @@ public class DownloadConfigDialog extends JDialog {
 
 	public void setSelectedComboBoxItem(Object item) {
 		this.comboBox.setSelectedItem(item);
+	}
+
+	private JComboBox generateComboBox(String implementation, String accessToken) throws ListFilesException {
+		JComboBox comboBox = new JComboBox();
+
+		if (implementation.equals("local")) {
+			LocalDirectory localDirectory = new LocalDirectory();
+			List<File> dirs = localDirectory.listDirectories("./UUP2018-januar", true);
+
+			for (File dir : dirs) {
+				try {
+					comboBox.addItem(dir.getCanonicalPath());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else if (implementation.equals("dropbox")) {
+			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
+			List<File> files = null;
+
+			try {
+				files = dropboxDirectory.listDirs("/UUP2018-januar", true);
+
+				for (File f : files) {
+					if (f.getName().contains(".") || f.getName().endsWith(".zip")) {
+						files.remove(f);
+					}
+				}
+
+			} catch (ListDirectoryException e) {
+				e.printStackTrace();
+			}
+
+			if (files != null) {
+				for (File file : files) {
+					comboBox.addItem(file.getAbsolutePath());
+				}
+			}
+		}
+
+		return comboBox;
 	}
 }
