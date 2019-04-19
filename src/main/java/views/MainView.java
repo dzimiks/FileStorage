@@ -2,6 +2,7 @@ package views;
 
 import com.google.gson.Gson;
 import dialogs.*;
+import dropbox.models.DropboxDirectory;
 import listeners.CloseApplicationListener;
 import model.Student;
 import models.LocalDirectory;
@@ -58,6 +59,7 @@ public class MainView extends JFrame {
 
 		Student student = gson.fromJson(reader, Student.class);
 		String implementation = student.getImplementation();
+		String accessToken = student.getAccessToken();
 		System.out.println("Student name: " + student.getName() + " " + student.getSurname());
 		System.out.println("Implementation: " + implementation);
 
@@ -104,17 +106,23 @@ public class MainView extends JFrame {
 		});
 
 		LocalDirectory localDirectory = new LocalDirectory();
+		DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
 		LocalFile localFile = new LocalFile();
 
 		ArrayList<File> dirs = localDirectory.listDirectories(".", true);
+		ArrayList<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json"}, true);
 		JComboBox comboBox = new JComboBox();
 
-		for (File dir : dirs) {
-			try {
-				comboBox.addItem(dir.getCanonicalPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+//		for (File dir : dirs) {
+//			try {
+//				comboBox.addItem(dir.getCanonicalPath());
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+
+		for (String file : files) {
+			comboBox.addItem(file);
 		}
 
 		JButton btnCreateFile = new JButton("Create file");
