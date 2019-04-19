@@ -105,25 +105,7 @@ public class MainView extends JFrame {
 
 		});
 
-		LocalDirectory localDirectory = new LocalDirectory();
-		DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
-		LocalFile localFile = new LocalFile();
-
-		ArrayList<File> dirs = localDirectory.listDirectories(".", true);
-		ArrayList<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json"}, true);
-		JComboBox comboBox = new JComboBox();
-
-//		for (File dir : dirs) {
-//			try {
-//				comboBox.addItem(dir.getCanonicalPath());
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-
-		for (String file : files) {
-			comboBox.addItem(file);
-		}
+		JComboBox comboBox = generateComboBox(implementation, accessToken);
 
 		JButton btnCreateFile = new JButton("Create file");
 		JButton btnDeleteFile = new JButton("Delete file");
@@ -213,5 +195,31 @@ public class MainView extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private JComboBox generateComboBox(String implementation, String accessToken) {
+		JComboBox comboBox = new JComboBox();
+
+		if (implementation.equals("local")) {
+			LocalDirectory localDirectory = new LocalDirectory();
+			ArrayList<File> dirs = localDirectory.listDirectories(".", true);
+
+			for (File dir : dirs) {
+				try {
+					comboBox.addItem(dir.getCanonicalPath());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else if (implementation.equals("dropbox")) {
+			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
+			ArrayList<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json"}, true);
+
+			for (String file : files) {
+				comboBox.addItem(file);
+			}
+		}
+
+		return comboBox;
 	}
 }
