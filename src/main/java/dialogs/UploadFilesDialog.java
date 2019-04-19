@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Dialgo for uploading multiple files.
+ * Dialog for uploading multiple files.
  * @author dzimiks
  * Date: 19-04-2019 at 12:03
  */
