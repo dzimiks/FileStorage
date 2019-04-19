@@ -6,12 +6,14 @@ import model.Student;
 import views.MainView;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
  * Dialog for uploading multiple files.
+ *
  * @author dzimiks
  * Date: 19-04-2019 at 12:03
  */
@@ -47,6 +49,11 @@ public class UploadFilesDialog extends JDialog {
 
 		chooser.setMultiSelectionEnabled(true);
 		chooser.showOpenDialog(MainView.getInstance());
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter("JSON files", "json"));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter("Txt files", "txt"));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter("PDF Documents", "pdf"));
+		chooser.addChoosableFileFilter(new FileNameExtensionFilter("MS Office Documents", "docx", "xlsx", "pptx"));
 		files = chooser.getSelectedFiles();
 
 		dirSource.setBounds(10, 10, 150, 25);
