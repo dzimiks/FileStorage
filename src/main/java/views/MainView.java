@@ -167,6 +167,18 @@ public class MainView extends JFrame {
 			DownloadDirDialog dialog = new DownloadDirDialog(student);
 			dialog.setVisible(true);
 		});
+		btnDownloadFile.addActionListener(e -> {
+			DownloadFileDialog dialog = new DownloadFileDialog(student);
+			dialog.setVisible(true);
+		});
+		btnUploadDir.addActionListener(e -> {
+			UploadDirDialog dialog = new UploadDirDialog(student);
+			dialog.setVisible(true);
+		});
+		btnUploadFile.addActionListener(e -> {
+			UploadFileDialog dialog = new UploadFileDialog(student);
+			dialog.setVisible(true);
+		});
 
 		add(firstName);
 		add(tfFirstName);

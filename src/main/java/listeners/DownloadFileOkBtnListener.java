@@ -1,7 +1,7 @@
 package listeners;
 
-import dialogs.UploadDirDialog;
-import dialogs.UploadFileDialog;
+import dialogs.DownloadDirDialog;
+import dialogs.DownloadFileDialog;
 import model.Student;
 import models.LocalDirectory;
 import models.LocalFile;
@@ -9,11 +9,11 @@ import models.LocalFile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UploadFileOkBtnListener implements ActionListener {
-    private UploadFileDialog dialog;
+public class DownloadFileOkBtnListener implements ActionListener {
+    private DownloadFileDialog dialog;
     private Student student;
 
-    public UploadFileOkBtnListener(UploadFileDialog dialog, Student student) {
+    public DownloadFileOkBtnListener(DownloadFileDialog dialog, Student student) {
         this.dialog = dialog;
         this.student = student;
     }
@@ -33,7 +33,7 @@ public class UploadFileOkBtnListener implements ActionListener {
 //                }
 //
 //                ld.create(name, path);
-                lf.upload(src,dest);
+                lf.move(src,dest);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

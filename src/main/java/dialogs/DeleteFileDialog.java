@@ -40,8 +40,8 @@ public class DeleteFileDialog extends JDialog {
         btnOk.addActionListener(new DeleteFileDialogOkBtnListener(this, student));
         btnCancel.addActionListener(new DialogCancelButtonListener(this));
 
-        add(fileName);
-        add(tfFileName);
+//        add(fileName);
+//        add(tfFileName);
         add(filePath);
         add(tfFilePath);
         add(btnOk);

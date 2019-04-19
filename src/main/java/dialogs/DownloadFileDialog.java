@@ -1,14 +1,14 @@
 package dialogs;
 
 import listeners.DialogCancelButtonListener;
-import listeners.UploadDirOkBtnListener;
-import listeners.UploadFileOkBtnListener;
+import listeners.DownloadDirOkBtnListener;
+import listeners.DownloadFileOkBtnListener;
 import model.Student;
 import views.MainView;
 
 import javax.swing.*;
 
-public class UploadFileDialog extends JDialog {
+public class DownloadFileDialog extends JDialog {
     private JLabel dirSource;
     private JTextField tfDirSource;
     private JLabel dirDestination;
@@ -16,7 +16,7 @@ public class UploadFileDialog extends JDialog {
     private String implementation;
     private Student student;
 
-    public UploadFileDialog(Student student) {
+    public DownloadFileDialog(Student student) {
         this.student = student;
         setLayout(null);
         setResizable(false);
@@ -43,7 +43,7 @@ public class UploadFileDialog extends JDialog {
         btnOk.setBounds(135, 100, 60, 25);
         btnCancel.setBounds(195, 100, 80, 25);
 
-        btnOk.addActionListener(new UploadFileOkBtnListener(this, student));
+        btnOk.addActionListener(new DownloadFileOkBtnListener(this, student));
         btnCancel.addActionListener(new DialogCancelButtonListener(this));
 
         add(dirSource);

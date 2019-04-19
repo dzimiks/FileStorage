@@ -22,7 +22,7 @@ public class DeleteFileDialogOkBtnListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String path = dialog.getTfFilePath();
-
+        implementation = student.getImplementation();
 
         if (implementation.equals("local")) {
             try {
