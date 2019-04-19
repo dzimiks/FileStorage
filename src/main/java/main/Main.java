@@ -21,7 +21,7 @@ import java.io.FileReader;
 public class Main {
 
 	public static void main(String[] args) {
-//		initStorage();
+		initStorage();
 		MainView view = MainView.getInstance();
 		view.setVisible(true);
 	}

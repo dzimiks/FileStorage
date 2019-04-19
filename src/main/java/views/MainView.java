@@ -11,7 +11,7 @@ import models.LocalDirectory;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author dzimiks
@@ -179,7 +179,7 @@ public class MainView extends JFrame {
 
 		if (implementation.equals("local")) {
 			LocalDirectory localDirectory = new LocalDirectory();
-			ArrayList<File> dirs = localDirectory.listDirectories(".", true);
+			List<File> dirs = localDirectory.listDirectories(".", true);
 
 			for (File dir : dirs) {
 				try {
@@ -190,7 +190,7 @@ public class MainView extends JFrame {
 			}
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
-			ArrayList<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json", "zip"}, true);
+			List<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json", "zip"}, true);
 
 			for (String file : files) {
 				comboBox.addItem(file);
@@ -206,7 +206,7 @@ public class MainView extends JFrame {
 		if (implementation.equals("local")) {
 			LocalDirectory localDirectory = new LocalDirectory();
 //			ArrayList<File> dirs = localDirectory.listFiles(".", true);
-			ArrayList<File> files = localDirectory.listAllFiles(".", true);
+			List<File> files = localDirectory.listFiles(".", true);
 
 			for (File f : files) {
 				try {
@@ -217,7 +217,7 @@ public class MainView extends JFrame {
 			}
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
-			ArrayList<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json"}, true);
+			List<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json"}, true);
 
 			for (String file : files) {
 				comboBox.addItem(file);
