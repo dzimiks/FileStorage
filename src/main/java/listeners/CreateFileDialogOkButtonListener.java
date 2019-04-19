@@ -29,17 +29,13 @@ public class CreateFileDialogOkButtonListener implements ActionListener {
 		String path = dialog.getTfFilePath();
 
 		if (implementation.equals("local")) {
-			try {
-				LocalFile localFile = new LocalFile();
-				// TODO: Handle exceptions if empty string etc.
-				if (name.equals("")) {
-					name = "new-local-file.txt";
-				}
-
-				localFile.create(name, path);
-			} catch (CreateFileException ex) {
-				ex.printStackTrace();
+			LocalFile localFile = new LocalFile();
+			// TODO: Handle exceptions if empty string etc.
+			if (name.equals("")) {
+				name = "new-local-file.txt";
 			}
+
+			localFile.create(name, path);
 
 			System.out.println("=== Create file ===");
 			System.out.println("Name: " + name);

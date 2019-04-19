@@ -64,7 +64,7 @@ public class Main {
 					System.out.println("Error");
 					break;
 			}
-		} catch (FileNotFoundException | CreateFileException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

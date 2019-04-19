@@ -6,6 +6,7 @@ import dropbox.models.DropboxDirectory;
 import listeners.CloseApplicationListener;
 import model.Student;
 import models.LocalDirectory;
+import models.LocalFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,6 +60,7 @@ public class MainView extends JFrame {
 		setLocationRelativeTo(null);
 
 		JComboBox comboBox = generateComboBox(implementation, accessToken);
+		JComboBox comboBoxFiles = generateComboBoxFiles(implementation, accessToken);
 
 		JButton btnDownloadConfig = new JButton("Config");
 
@@ -75,6 +77,7 @@ public class MainView extends JFrame {
 		// TODO: Bounds
 		btnDownloadConfig.setBounds(10, 0, 150, 25);
 		comboBox.setBounds(10, 180, 600, 25);
+		comboBoxFiles.setBounds(10, 220, 600, 25);
 		btnCreateFile.setBounds(800, 10, 150, 25);
 		btnDeleteFile.setBounds(800, 50, 150, 25);
 		btnDownloadFile.setBounds(800, 90, 150, 25);
@@ -125,6 +128,7 @@ public class MainView extends JFrame {
 
 		add(btnDownloadConfig);
 		add(comboBox);
+		add(comboBoxFiles);
 		add(btnCreateFile);
 		add(btnDeleteFile);
 		add(btnDownloadFile);
@@ -153,6 +157,33 @@ public class MainView extends JFrame {
 			for (File dir : dirs) {
 				try {
 					comboBox.addItem(dir.getCanonicalPath());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} else if (implementation.equals("dropbox")) {
+			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
+			ArrayList<String> files = dropboxDirectory.listFilesWithGivenExtensions("", new String[]{"txt", "json", "zip"}, true);
+
+			for (String file : files) {
+				comboBox.addItem(file);
+			}
+		}
+
+		return comboBox;
+	}
+
+	private JComboBox generateComboBoxFiles(String implementation, String accessToken) {
+		JComboBox comboBox = new JComboBox();
+
+		if (implementation.equals("local")) {
+			LocalDirectory localDirectory = new LocalDirectory();
+//			ArrayList<File> dirs = localDirectory.listFiles(".", true);
+			ArrayList<File> files = localDirectory.listAllFiles(".", true);
+
+			for (File f : files) {
+				try {
+					comboBox.addItem(f.getCanonicalPath());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
