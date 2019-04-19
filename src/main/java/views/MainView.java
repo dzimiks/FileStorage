@@ -63,7 +63,7 @@ public class MainView extends JFrame {
 		chooseFile = new JButton("Download");
 		path.setEditable(false);
 
-		JButton btnOk = new JButton("OK");
+		JButton btnOk = new JButton("Ok");
 		JButton btnCancel = new JButton("Cancel");
 
 		fileChooser = new JFileChooser();
