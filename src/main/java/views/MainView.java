@@ -7,7 +7,6 @@ import exceptions.ListFilesException;
 import listeners.CloseApplicationListener;
 import model.Student;
 import models.LocalDirectory;
-import models.LocalFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,11 +72,13 @@ public class MainView extends JFrame {
 		JButton btnDeleteFile = new JButton("Delete file");
 		JButton btnDownloadFile = new JButton("Download file");
 		JButton btnUploadFile = new JButton("Upload file");
+		JButton btnUploadFiles = new JButton("Upload files");
 
 		JButton btnCreateDir = new JButton("Create dir");
 		JButton btnDeleteDir = new JButton("Delete dir");
 		JButton btnDownloadDir = new JButton("Download dir");
 		JButton btnUploadDir = new JButton("Upload dir");
+		JButton btnUploadDirs = new JButton("Upload dirs");
 
 		// TODO: Bounds
 		btnDownloadConfig.setBounds(10, 0, 150, 25);
@@ -87,10 +88,13 @@ public class MainView extends JFrame {
 		btnDeleteFile.setBounds(800, 50, 150, 25);
 		btnDownloadFile.setBounds(800, 90, 150, 25);
 		btnUploadFile.setBounds(800, 130, 150, 25);
+		btnUploadFiles.setBounds(800, 170, 150, 25);
+
 		btnCreateDir.setBounds(1000, 10, 150, 25);
 		btnDeleteDir.setBounds(1000, 50, 150, 25);
 		btnDownloadDir.setBounds(1000, 90, 150, 25);
 		btnUploadDir.setBounds(1000, 130, 150, 25);
+		btnUploadDirs.setBounds(1000, 170, 150, 25);
 
 		btnDownloadConfig.addActionListener(e -> {
 			DownloadConfigDialog dialog = new DownloadConfigDialog(student);
@@ -106,28 +110,44 @@ public class MainView extends JFrame {
 			CreateDirectoryDialog dialog = new CreateDirectoryDialog(student);
 			dialog.setVisible(true);
 		});
+
 		btnDeleteDir.addActionListener(e -> {
 			DeleteDirDialog dialog = new DeleteDirDialog(student);
 			dialog.setVisible(true);
 		});
+
 		btnDeleteFile.addActionListener(e -> {
 			DeleteFileDialog dialog = new DeleteFileDialog(student);
 			dialog.setVisible(true);
 		});
+
 		btnDownloadDir.addActionListener(e -> {
 			DownloadDirDialog dialog = new DownloadDirDialog(student);
 			dialog.setVisible(true);
 		});
+
 		btnDownloadFile.addActionListener(e -> {
 			DownloadFileDialog dialog = new DownloadFileDialog(student);
 			dialog.setVisible(true);
 		});
+
 		btnUploadDir.addActionListener(e -> {
 			UploadDirDialog dialog = new UploadDirDialog(student);
 			dialog.setVisible(true);
 		});
+
 		btnUploadFile.addActionListener(e -> {
 			UploadFileDialog dialog = new UploadFileDialog(student);
+			dialog.setVisible(true);
+		});
+
+		btnUploadFile.addActionListener(e -> {
+			UploadFilesDialog dialog = new UploadFilesDialog(student);
+			dialog.setVisible(true);
+		});
+
+		btnUploadDirs.addActionListener(e -> {
+			UploadDirsDialog dialog = new UploadDirsDialog(student);
 			dialog.setVisible(true);
 		});
 
@@ -138,10 +158,12 @@ public class MainView extends JFrame {
 		add(btnDeleteFile);
 		add(btnDownloadFile);
 		add(btnUploadFile);
+		add(btnUploadFiles);
 		add(btnCreateDir);
 		add(btnDeleteDir);
 		add(btnDownloadDir);
 		add(btnUploadDir);
+		add(btnUploadDirs);
 	}
 
 	private void setLookAndFeel() {
