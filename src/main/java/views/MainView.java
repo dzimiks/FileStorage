@@ -1,5 +1,6 @@
 package views;
 
+import dialogs.CreateFileDialog;
 import listeners.CloseApplicationListener;
 import models.LocalDirectory;
 import models.LocalFile;
@@ -123,6 +124,11 @@ public class MainView extends JFrame {
 		btnDeleteDir.setBounds(1000, 50, 150, 25);
 		btnDownloadDir.setBounds(1000, 90, 150, 25);
 		btnUploadDir.setBounds(1000, 130, 150, 25);
+
+		btnCreateFile.addActionListener(e -> {
+			CreateFileDialog dialog = new CreateFileDialog();
+			dialog.setVisible(true);
+		});
 
 		add(firstName);
 		add(tfFirstName);
