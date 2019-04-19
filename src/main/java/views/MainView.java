@@ -84,8 +84,12 @@ public class MainView extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 
 		fileChooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("json, txt", "json", "txt");
-		fileChooser.setFileFilter(filter);
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("JSON files", "json"));
+		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Txt files", "txt"));
+		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
+		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PDF Documents", "pdf"));
+		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("MS Office Documents", "docx", "xlsx", "pptx"));
 		fileChooser.setMultiSelectionEnabled(true);
 
 		chooseFile.addActionListener(e -> {
