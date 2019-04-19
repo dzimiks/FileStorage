@@ -3,6 +3,7 @@ package views;
 import com.google.gson.Gson;
 import dialogs.CreateDirectoryDialog;
 import dialogs.CreateFileDialog;
+import dialogs.DeleteDirDialog;
 import listeners.CloseApplicationListener;
 import model.Student;
 import models.LocalDirectory;
@@ -154,6 +155,10 @@ public class MainView extends JFrame {
 
 		btnCreateDir.addActionListener(e -> {
 			CreateDirectoryDialog dialog = new CreateDirectoryDialog(student);
+			dialog.setVisible(true);
+		});
+		btnDeleteDir.addActionListener(e -> {
+			DeleteDirDialog dialog = new DeleteDirDialog(student);
 			dialog.setVisible(true);
 		});
 
