@@ -18,7 +18,7 @@ public class UploadDirsDialog extends JDialog {
 	private String implementation;
 	private Student student;
 	private JFileChooser chooser = new JFileChooser();
-	private File[] files = new File[1];
+	private File[] files = new File[10];
 
 	public UploadDirsDialog(Student student) {
 		this.student = student;
@@ -40,6 +40,7 @@ public class UploadDirsDialog extends JDialog {
 		JButton btnOk = new JButton("OK");
 		JButton btnCancel = new JButton("Cancel");
 
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.setMultiSelectionEnabled(true);
 		chooser.showOpenDialog(MainView.getInstance());
 		files = chooser.getSelectedFiles();

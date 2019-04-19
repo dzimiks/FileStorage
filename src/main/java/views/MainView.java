@@ -141,7 +141,7 @@ public class MainView extends JFrame {
 			dialog.setVisible(true);
 		});
 
-		btnUploadFile.addActionListener(e -> {
+		btnUploadFiles.addActionListener(e -> {
 			UploadFilesDialog dialog = new UploadFilesDialog(student);
 			dialog.setVisible(true);
 		});

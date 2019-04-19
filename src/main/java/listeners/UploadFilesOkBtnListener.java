@@ -4,11 +4,14 @@ import dialogs.UploadFilesDialog;
 import dropbox.models.DropboxDirectory;
 import dropbox.models.DropboxFile;
 import exceptions.UploadException;
+import exceptions.UploadMultipleZipException;
 import model.Student;
 import models.LocalFile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 
 public class UploadFilesOkBtnListener implements ActionListener {
 	private UploadFilesDialog dialog;
@@ -21,7 +24,7 @@ public class UploadFilesOkBtnListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String src = dialog.getTfDirSource();
+		ArrayList<File> src = dialog.getFiles();
 		String dest = dialog.getTfDirDestination();
 		String implementation = student.getImplementation();
 		String accessToken = student.getAccessToken();
@@ -35,7 +38,7 @@ public class UploadFilesOkBtnListener implements ActionListener {
 //                }
 //
 //                ld.create(name, path);
-				lf.upload(src, dest);
+				lf.uploadMultipleZip(src, dest, student.getName() + "-" + student.getSurname());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -48,8 +51,8 @@ public class UploadFilesOkBtnListener implements ActionListener {
 			DropboxFile dropboxFile = new DropboxFile(dropboxDirectory.getClient());
 
 			try {
-				dropboxFile.upload(src, dest);
-			} catch (UploadException e1) {
+				dropboxFile.uploadMultipleZip(src, dest, student.getName() + "-" + student.getSurname());
+			} catch (UploadMultipleZipException e1) {
 				e1.printStackTrace();
 			}
 		} else {

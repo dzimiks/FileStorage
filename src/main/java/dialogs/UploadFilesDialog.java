@@ -6,6 +6,9 @@ import model.Student;
 import views.MainView;
 
 import javax.swing.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author dzimiks
@@ -18,6 +21,8 @@ public class UploadFilesDialog extends JDialog {
 	private JTextField tfDirDestination;
 	private String implementation;
 	private Student student;
+	private JFileChooser chooser = new JFileChooser();
+	private File[] files = new File[10];
 
 	public UploadFilesDialog(Student student) {
 		this.student = student;
@@ -39,8 +44,12 @@ public class UploadFilesDialog extends JDialog {
 		JButton btnOk = new JButton("OK");
 		JButton btnCancel = new JButton("Cancel");
 
+		chooser.setMultiSelectionEnabled(true);
+		chooser.showOpenDialog(MainView.getInstance());
+		files = chooser.getSelectedFiles();
+
 		dirSource.setBounds(10, 10, 150, 25);
-		tfDirSource.setBounds(180, 10, 190, 25);
+		chooser.setBounds(180, 10, 190, 25);
 		dirDestination.setBounds(10, 50, 150, 25);
 		tfDirDestination.setBounds(180, 50, 190, 25);
 		btnOk.setBounds(135, 100, 60, 25);
@@ -50,7 +59,7 @@ public class UploadFilesDialog extends JDialog {
 		btnCancel.addActionListener(new DialogCancelButtonListener(this));
 
 		add(dirSource);
-		add(tfDirSource);
+		add(chooser);
 		add(dirDestination);
 		add(tfDirDestination);
 		add(btnOk);
@@ -63,6 +72,10 @@ public class UploadFilesDialog extends JDialog {
 
 	public void setDirSource(JLabel dirSource) {
 		this.dirSource = dirSource;
+	}
+
+	public ArrayList<File> getFiles() {
+		return new ArrayList<>(Arrays.asList(files));
 	}
 
 	public String getTfDirSource() {
