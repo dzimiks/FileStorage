@@ -6,13 +6,9 @@ import dropbox.models.DropboxDirectory;
 import listeners.CloseApplicationListener;
 import model.Student;
 import models.LocalDirectory;
-import models.LocalFile;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -23,16 +19,6 @@ import java.util.ArrayList;
 public class MainView extends JFrame {
 
 	private static MainView instance;
-
-	private JLabel firstName;
-	private JTextField tfFirstName;
-	private JLabel lastName;
-	private JTextField tfLastName;
-	private JTextField path;
-	private JButton chooseFile;
-	private JFileChooser fileChooser;
-	private File readFromFile;
-
 	private BufferedReader reader;
 	private Gson gson;
 
@@ -72,40 +58,9 @@ public class MainView extends JFrame {
 		this.addWindowListener(new CloseApplicationListener());
 		setLocationRelativeTo(null);
 
-		firstName = new JLabel("Student first name:");
-		tfFirstName = new JTextField();
-
-		lastName = new JLabel("Student last name:");
-		tfLastName = new JTextField();
-
-		path = new JTextField();
-		chooseFile = new JButton("Download");
-		path.setEditable(false);
-
-		JButton btnOk = new JButton("OK");
-		JButton btnCancel = new JButton("Cancel");
-
-		fileChooser = new JFileChooser();
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("JSON files", "json"));
-		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Txt files", "txt"));
-		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
-		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("PDF Documents", "pdf"));
-		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("MS Office Documents", "docx", "xlsx", "pptx"));
-		fileChooser.setMultiSelectionEnabled(true);
-
-		chooseFile.addActionListener(e -> {
-			if (fileChooser.showDialog(new JDialog(), "Choose") == JFileChooser.APPROVE_OPTION) {
-				path.setText(fileChooser.getSelectedFile().getAbsolutePath());
-				readFromFile = fileChooser.getSelectedFile();
-			}
-		});
-
-		btnOk.addActionListener(e -> {
-
-		});
-
 		JComboBox comboBox = generateComboBox(implementation, accessToken);
+
+		JButton btnDownloadConfig = new JButton("Config");
 
 		JButton btnCreateFile = new JButton("Create file");
 		JButton btnDeleteFile = new JButton("Delete file");
@@ -118,14 +73,7 @@ public class MainView extends JFrame {
 		JButton btnUploadDir = new JButton("Upload dir");
 
 		// TODO: Bounds
-		firstName.setBounds(10, 10, 150, 25);
-		tfFirstName.setBounds(180, 10, 190, 25);
-		lastName.setBounds(10, 50, 150, 25);
-		tfLastName.setBounds(180, 50, 190, 25);
-		path.setBounds(10, 90, 250, 25);
-		chooseFile.setBounds(270, 90, 100, 25);
-		btnOk.setBounds(120, 130, 70, 25);
-		btnCancel.setBounds(180, 130, 80, 25);
+		btnDownloadConfig.setBounds(10, 0, 150, 25);
 		comboBox.setBounds(10, 180, 600, 25);
 		btnCreateFile.setBounds(800, 10, 150, 25);
 		btnDeleteFile.setBounds(800, 50, 150, 25);
@@ -135,6 +83,11 @@ public class MainView extends JFrame {
 		btnDeleteDir.setBounds(1000, 50, 150, 25);
 		btnDownloadDir.setBounds(1000, 90, 150, 25);
 		btnUploadDir.setBounds(1000, 130, 150, 25);
+
+		btnDownloadConfig.addActionListener(e -> {
+			DownloadConfigDialog dialog = new DownloadConfigDialog(student);
+			dialog.setVisible(true);
+		});
 
 		btnCreateFile.addActionListener(e -> {
 			CreateFileDialog dialog = new CreateFileDialog(student);
@@ -170,14 +123,7 @@ public class MainView extends JFrame {
 			dialog.setVisible(true);
 		});
 
-		add(firstName);
-		add(tfFirstName);
-		add(lastName);
-		add(tfLastName);
-		add(path);
-		add(chooseFile);
-		add(btnOk);
-		add(btnCancel);
+		add(btnDownloadConfig);
 		add(comboBox);
 		add(btnCreateFile);
 		add(btnDeleteFile);
