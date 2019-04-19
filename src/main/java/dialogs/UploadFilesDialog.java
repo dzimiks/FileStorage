@@ -8,6 +8,7 @@ import views.MainView;
 import javax.swing.*;
 
 /**
+ * Dialgo for uploading multiple files.
  * @author dzimiks
  * Date: 19-04-2019 at 12:03
  */

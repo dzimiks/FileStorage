@@ -11,6 +11,8 @@ import java.io.File;
 import java.util.Objects;
 
 /**
+ * Dialog for downloading config.
+ *
  * @author dzimiks
  * Date: 19-04-2019 at 05:26
  */

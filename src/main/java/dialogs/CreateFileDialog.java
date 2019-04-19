@@ -8,6 +8,7 @@ import views.MainView;
 import javax.swing.*;
 
 /**
+ * Dialog for creating file.
  * @author dzimiks
  * Date: 19-04-2019 at 02:24
  */

@@ -8,6 +8,9 @@ import views.MainView;
 
 import javax.swing.*;
 
+/**
+ * Dialog for creating directory.
+ */
 public class CreateDirectoryDialog extends JDialog {
 	private JLabel fileName;
 	private JTextField tfFileName;

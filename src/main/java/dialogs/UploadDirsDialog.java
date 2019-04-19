@@ -10,6 +10,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Diaglog for uploading multiple directories.
+ */
 public class UploadDirsDialog extends JDialog {
 	private JLabel dirSource;
 	private JTextField tfDirSource;

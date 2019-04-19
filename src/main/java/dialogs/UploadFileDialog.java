@@ -8,6 +8,9 @@ import views.MainView;
 
 import javax.swing.*;
 
+/**
+ * Dialgo for uploading file.
+ */
 public class UploadFileDialog extends JDialog {
     private JLabel dirSource;
     private JTextField tfDirSource;

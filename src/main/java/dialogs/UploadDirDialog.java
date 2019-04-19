@@ -8,6 +8,9 @@ import views.MainView;
 
 import javax.swing.*;
 
+/**
+ * Dialog for uploading directory.
+ */
 public class UploadDirDialog extends JDialog {
     private JLabel dirSource;
     private JTextField tfDirSource;
