@@ -2,6 +2,7 @@ package listeners;
 
 import dialogs.CreateFileDialog;
 import exceptions.CreateFileException;
+import model.Student;
 import models.LocalFile;
 
 import java.awt.event.ActionEvent;
@@ -14,18 +15,18 @@ import java.awt.event.ActionListener;
 public class CreateFileDialogOkButtonListener implements ActionListener {
 
 	private CreateFileDialog dialog;
-	private String implementation;
+	private Student student;
 
-	public CreateFileDialogOkButtonListener(CreateFileDialog dialog, String implementation) {
+	public CreateFileDialogOkButtonListener(CreateFileDialog dialog, Student student) {
 		this.dialog = dialog;
-		this.implementation = implementation;
+		this.student = student;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		String implementation = student.getImplementation();
 		String name = dialog.getTfFileName().trim().replace(" ", "-");
 		String path = dialog.getTfFilePath();
-
 
 		if (implementation.equals("local")) {
 			try {

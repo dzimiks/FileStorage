@@ -2,7 +2,9 @@ package listeners;
 
 import dialogs.CreateDirectoryDialog;
 import dialogs.CreateFileDialog;
+import dropbox.models.DropboxDirectory;
 import exceptions.CreateFileException;
+import model.Student;
 import models.LocalDirectory;
 import models.LocalFile;
 
@@ -11,40 +13,44 @@ import java.awt.event.ActionListener;
 
 public class CreateDirectoryDialogOkButtonListener implements ActionListener {
 
-    private CreateDirectoryDialog dialog;
-    private String implementation;
+	private CreateDirectoryDialog dialog;
+	private Student student;
 
-    public CreateDirectoryDialogOkButtonListener(CreateDirectoryDialog dialog, String implementation) {
-        this.dialog = dialog;
-        this.implementation = implementation;
-    }
+	public CreateDirectoryDialogOkButtonListener(CreateDirectoryDialog dialog, Student student) {
+		this.dialog = dialog;
+		this.student = student;
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String name = dialog.getTfFileName().trim().replace(" ", "-");
-        String path = dialog.getTfFilePath();
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String implementation = student.getImplementation();
+		String accessToken = student.getAccessToken();
+		String name = dialog.getTfFileName().trim().replace(" ", "-");
+		String path = dialog.getTfFilePath();
 
+		// TODO: Handle exceptions if empty string etc.
+		if (name.equals("")) {
+			name = "new-local-directory.txt";
+		}
 
-        if (implementation.equals("local")) {
-            try {
-                LocalDirectory ld = new LocalDirectory();
-                // TODO: Handle exceptions if empty string etc.
-                if (name.equals("")) {
-                    name = "new-local-directory";
-                }
+		System.out.println("=== Create directory ===");
+		System.out.println("Name: " + name);
+		System.out.println("Path: " + path);
 
-                ld.create(name, path);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+		if (implementation.equals("local")) {
+			try {
+				LocalDirectory ld = new LocalDirectory();
+				ld.create(name, path);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		} else if (implementation.equals("dropbox")) {
+			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
+			dropboxDirectory.create(name, path);
+		} else {
+			System.out.println("Error");
+		}
 
-            System.out.println("=== Create directory ===");
-            System.out.println("Name: " + name);
-            System.out.println("Path: " + path);
-        } else {
-            System.out.println("Error");
-        }
-
-        this.dialog.setVisible(false);
-    }
+		this.dialog.setVisible(false);
+	}
 }

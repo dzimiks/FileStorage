@@ -2,6 +2,7 @@ package dialogs;
 
 import listeners.DialogCancelButtonListener;
 import listeners.CreateFileDialogOkButtonListener;
+import model.Student;
 import views.MainView;
 
 import javax.swing.*;
@@ -16,10 +17,10 @@ public class CreateFileDialog extends JDialog {
 	private JTextField tfFileName;
 	private JLabel filePath;
 	private JTextField tfFilePath;
-	private String implementation;
+	private Student student;
 
-	public CreateFileDialog(String implementation) {
-		this.implementation = implementation;
+	public CreateFileDialog(Student student) {
+		this.student = student;
 		setLayout(null);
 		setResizable(false);
 		setTitle("Create new file");
@@ -44,7 +45,7 @@ public class CreateFileDialog extends JDialog {
 		btnOk.setBounds(135, 100, 50, 25);
 		btnCancel.setBounds(195, 100, 80, 25);
 
-		btnOk.addActionListener(new CreateFileDialogOkButtonListener(this, implementation));
+		btnOk.addActionListener(new CreateFileDialogOkButtonListener(this, student));
 		btnCancel.addActionListener(new DialogCancelButtonListener(this));
 
 		add(fileName);

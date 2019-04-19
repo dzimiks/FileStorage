@@ -148,12 +148,12 @@ public class MainView extends JFrame {
 		btnUploadDir.setBounds(1000, 130, 150, 25);
 
 		btnCreateFile.addActionListener(e -> {
-			CreateFileDialog dialog = new CreateFileDialog(implementation);
+			CreateFileDialog dialog = new CreateFileDialog(student);
 			dialog.setVisible(true);
 		});
 
-		btnCreateDir.addActionListener(e ->{
-			CreateDirectoryDialog dialog = new CreateDirectoryDialog(implementation);
+		btnCreateDir.addActionListener(e -> {
+			CreateDirectoryDialog dialog = new CreateDirectoryDialog(student);
 			dialog.setVisible(true);
 		});
 
