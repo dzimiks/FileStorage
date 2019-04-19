@@ -1,6 +1,8 @@
 package views;
 
 import listeners.CloseApplicationListener;
+import models.LocalDirectory;
+import models.LocalFile;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -8,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author dzimiks
@@ -41,7 +45,8 @@ public class MainView extends JFrame {
 	private void init() {
 //		setLookAndFeel();
 		setLayout(null);
-		setSize(new Dimension(1200, 600));
+//		setSize(new Dimension(1800, 800));
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setMinimumSize(new Dimension(800, 700));
 		setTitle("File Storage");
 		this.addWindowListener(new CloseApplicationListener());
@@ -54,35 +59,70 @@ public class MainView extends JFrame {
 		tfLastName = new JTextField();
 
 		path = new JTextField();
-		chooseFile = new JButton("Download to:");
+		chooseFile = new JButton("Download");
 		path.setEditable(false);
-
-		firstName.setBounds(10, 10, 150, 25);
-		tfFirstName.setBounds(180, 10, 190, 25);
-		lastName.setBounds(10, 50, 150, 25);
-		tfLastName.setBounds(180, 50, 190, 25);
-		path.setBounds(10, 90, 250, 25);
-		chooseFile.setBounds(270, 90, 100, 25);
 
 		JButton btnOk = new JButton("OK");
 		JButton btnCancel = new JButton("Cancel");
-
-		btnOk.setBounds(120, 130, 70, 25);
-		btnCancel.setBounds(180, 130, 80, 25);
 
 		fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("json, txt", "json", "txt");
 		fileChooser.setFileFilter(filter);
 		fileChooser.setMultiSelectionEnabled(true);
+
 		chooseFile.addActionListener(e -> {
 			if (fileChooser.showDialog(new JDialog(), "Choose") == JFileChooser.APPROVE_OPTION) {
 				path.setText(fileChooser.getSelectedFile().getAbsolutePath());
 				readFromFile = fileChooser.getSelectedFile();
 			}
 		});
-		btnOk.addActionListener(actionEvent -> {
+
+		btnOk.addActionListener(e -> {
 
 		});
+
+		LocalDirectory localDirectory = new LocalDirectory();
+		LocalFile localFile = new LocalFile();
+
+		ArrayList<File> dirs = localDirectory.listDirectories(".", true);
+		JComboBox comboBox = new JComboBox();
+
+		for (File dir : dirs) {
+			try {
+				comboBox.addItem(dir.getCanonicalPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		JButton btnCreateFile = new JButton("Create file");
+		JButton btnDeleteFile = new JButton("Delete file");
+		JButton btnDownloadFile = new JButton("Download file");
+		JButton btnUploadFile = new JButton("Upload file");
+
+		JButton btnCreateDir = new JButton("Create dir");
+		JButton btnDeleteDir = new JButton("Delete dir");
+		JButton btnDownloadDir = new JButton("Download dir");
+		JButton btnUploadDir = new JButton("Upload dir");
+
+		// TODO: Bounds
+		firstName.setBounds(10, 10, 150, 25);
+		tfFirstName.setBounds(180, 10, 190, 25);
+		lastName.setBounds(10, 50, 150, 25);
+		tfLastName.setBounds(180, 50, 190, 25);
+		path.setBounds(10, 90, 250, 25);
+		chooseFile.setBounds(270, 90, 100, 25);
+		btnOk.setBounds(120, 130, 70, 25);
+		btnCancel.setBounds(180, 130, 80, 25);
+		comboBox.setBounds(10, 180, 600, 25);
+		btnCreateFile.setBounds(800, 10, 150, 25);
+		btnDeleteFile.setBounds(800, 50, 150, 25);
+		btnDownloadFile.setBounds(800, 90, 150, 25);
+		btnUploadFile.setBounds(800, 130, 150, 25);
+		btnCreateDir.setBounds(1000, 10, 150, 25);
+		btnDeleteDir.setBounds(1000, 50, 150, 25);
+		btnDownloadDir.setBounds(1000, 90, 150, 25);
+		btnUploadDir.setBounds(1000, 130, 150, 25);
 
 		add(firstName);
 		add(tfFirstName);
@@ -92,6 +132,15 @@ public class MainView extends JFrame {
 		add(chooseFile);
 		add(btnOk);
 		add(btnCancel);
+		add(comboBox);
+		add(btnCreateFile);
+		add(btnDeleteFile);
+		add(btnDownloadFile);
+		add(btnUploadFile);
+		add(btnCreateDir);
+		add(btnDeleteDir);
+		add(btnDownloadDir);
+		add(btnUploadDir);
 	}
 
 	private void setLookAndFeel() {
