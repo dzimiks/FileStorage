@@ -1,10 +1,7 @@
 package views;
 
 import com.google.gson.Gson;
-import dialogs.CreateDirectoryDialog;
-import dialogs.CreateFileDialog;
-import dialogs.DeleteDirDialog;
-import dialogs.DeleteFileDialog;
+import dialogs.*;
 import listeners.CloseApplicationListener;
 import model.Student;
 import models.LocalDirectory;
@@ -164,6 +161,10 @@ public class MainView extends JFrame {
 		});
 		btnDeleteFile.addActionListener(e -> {
 			DeleteFileDialog dialog = new DeleteFileDialog(student);
+			dialog.setVisible(true);
+		});
+		btnDownloadDir.addActionListener(e -> {
+			DownloadDirDialog dialog = new DownloadDirDialog(student);
 			dialog.setVisible(true);
 		});
 
