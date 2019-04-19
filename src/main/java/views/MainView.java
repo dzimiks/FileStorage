@@ -44,7 +44,7 @@ public class MainView extends JFrame {
 		this.gson = new Gson();
 
 		try {
-			this.reader = new BufferedReader(new FileReader("./config.json"));
+			this.reader = new BufferedReader(new FileReader("/home/slime/Faks/6.Semestar/SoftverskeKomponente/FileStorageApp/FileStorage/config.json"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
