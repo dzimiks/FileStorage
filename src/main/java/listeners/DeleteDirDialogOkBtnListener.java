@@ -9,6 +9,9 @@ import models.LocalDirectory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Delete directory button listener.
+ */
 public class DeleteDirDialogOkBtnListener implements ActionListener {
 	private DeleteDirDialog dialog;
 	private String implementation;

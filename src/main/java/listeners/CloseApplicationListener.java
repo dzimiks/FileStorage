@@ -5,6 +5,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /**
+ * Close application listener.
+ *
  * @author dzimiks
  * Date: 18-04-2019 at 23:06
  */

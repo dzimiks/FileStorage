@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Cancel button listener.
  * @author dzimiks
  * Date: 19-04-2019 at 02:40
  */

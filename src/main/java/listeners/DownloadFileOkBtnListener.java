@@ -10,6 +10,9 @@ import models.LocalFile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Download file button listener.
+ */
 public class DownloadFileOkBtnListener implements ActionListener {
 	private DownloadFileDialog dialog;
 	private Student student;

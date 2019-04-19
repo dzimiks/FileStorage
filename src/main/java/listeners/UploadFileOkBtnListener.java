@@ -12,6 +12,9 @@ import models.LocalFile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Upload file button listener.
+ */
 public class UploadFileOkBtnListener implements ActionListener {
 	private UploadFileDialog dialog;
 	private Student student;

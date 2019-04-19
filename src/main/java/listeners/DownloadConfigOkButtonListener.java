@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 /**
+ * Download config button listener.
  * @author dzimiks
  * Date: 19-04-2019 at 05:27
  */
