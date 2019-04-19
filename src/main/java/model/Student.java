@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Student model for loading data from json.
+ */
 public class Student {
 	private String name;
 	private String surname;
