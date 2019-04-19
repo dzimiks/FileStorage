@@ -1,6 +1,7 @@
 package listeners;
 
 import dialogs.DeleteDirDialog;
+import dropbox.models.DropboxDirectory;
 import model.Student;
 import models.LocalDirectory;
 
@@ -20,6 +21,8 @@ public class DeleteDirDialogOkBtnListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String path = dialog.getTfFilePath();
+		String accessToken = student.getAccessToken();
+		String implementation = student.getImplementation();
 
 		if (implementation.equals("local")) {
 			try {
@@ -35,8 +38,10 @@ public class DeleteDirDialogOkBtnListener implements ActionListener {
 			}
 
 			System.out.println("=== Delete directory ===");
-
 			System.out.println("Path: " + path);
+		} else if (implementation.equals("dropbox")) {
+			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
+			dropboxDirectory.delete(path);
 		} else {
 			System.out.println("Error");
 		}
