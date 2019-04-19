@@ -1,7 +1,9 @@
 package views;
 
+import com.google.gson.Gson;
 import dialogs.CreateFileDialog;
 import listeners.CloseApplicationListener;
+import model.Student;
 import models.LocalDirectory;
 import models.LocalFile;
 
@@ -10,8 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -31,6 +32,9 @@ public class MainView extends JFrame {
 	private JFileChooser fileChooser;
 	private File readFromFile;
 
+	private BufferedReader reader;
+	private Gson gson;
+
 	private MainView() {
 		init();
 	}
@@ -44,6 +48,19 @@ public class MainView extends JFrame {
 	}
 
 	private void init() {
+		this.gson = new Gson();
+
+		try {
+			this.reader = new BufferedReader(new FileReader("./config.json"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		Student student = gson.fromJson(reader, Student.class);
+		String implementation = student.getImplementation();
+		System.out.println("Student name: " + student.getName() + " " + student.getSurname());
+		System.out.println("Implementation: " + implementation);
+
 //		setLookAndFeel();
 		setLayout(null);
 //		setSize(new Dimension(1800, 800));
@@ -63,7 +80,7 @@ public class MainView extends JFrame {
 		chooseFile = new JButton("Download");
 		path.setEditable(false);
 
-		JButton btnOk = new JButton("Ok");
+		JButton btnOk = new JButton("OK");
 		JButton btnCancel = new JButton("Cancel");
 
 		fileChooser = new JFileChooser();
@@ -126,7 +143,7 @@ public class MainView extends JFrame {
 		btnUploadDir.setBounds(1000, 130, 150, 25);
 
 		btnCreateFile.addActionListener(e -> {
-			CreateFileDialog dialog = new CreateFileDialog();
+			CreateFileDialog dialog = new CreateFileDialog(implementation);
 			dialog.setVisible(true);
 		});
 

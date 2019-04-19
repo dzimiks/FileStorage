@@ -1,7 +1,6 @@
 package listeners;
 
-import dialogs.CreateFileDialog;
-
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,11 +8,11 @@ import java.awt.event.ActionListener;
  * @author dzimiks
  * Date: 19-04-2019 at 02:40
  */
-public class CreateFileDialogCancelButtonListener implements ActionListener {
+public class DialogCancelButtonListener implements ActionListener {
 
-	private CreateFileDialog dialog;
+	private JDialog dialog;
 
-	public CreateFileDialogCancelButtonListener(CreateFileDialog dialog) {
+	public DialogCancelButtonListener(JDialog dialog) {
 		this.dialog = dialog;
 	}
 

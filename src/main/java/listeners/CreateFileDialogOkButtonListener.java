@@ -14,9 +14,11 @@ import java.awt.event.ActionListener;
 public class CreateFileDialogOkButtonListener implements ActionListener {
 
 	private CreateFileDialog dialog;
+	private String implementation;
 
-	public CreateFileDialogOkButtonListener(CreateFileDialog dialog) {
+	public CreateFileDialogOkButtonListener(CreateFileDialog dialog, String implementation) {
 		this.dialog = dialog;
+		this.implementation = implementation;
 	}
 
 	@Override
@@ -25,20 +27,24 @@ public class CreateFileDialogOkButtonListener implements ActionListener {
 		String path = dialog.getTfFilePath();
 		LocalFile localFile = new LocalFile();
 
-		try {
-			// TODO: Handle exceptions if empty string etc.
-			if (name.equals("")) {
-				name = "new-local-file.txt";
+		if (implementation.equals("local")) {
+			try {
+				// TODO: Handle exceptions if empty string etc.
+				if (name.equals("")) {
+					name = "new-local-file.txt";
+				}
+
+				localFile.create(name, path);
+			} catch (CreateFileException ex) {
+				ex.printStackTrace();
 			}
 
-			localFile.create(name, path);
-		} catch (CreateFileException ex) {
-			ex.printStackTrace();
+			System.out.println("=== Create file ===");
+			System.out.println("Name: " + name);
+			System.out.println("Path: " + path);
+		} else {
+			System.out.println("Error");
 		}
-
-		System.out.println("=== Create file ===");
-		System.out.println("Name: " + name);
-		System.out.println("Path: " + path);
 
 		this.dialog.setVisible(false);
 	}

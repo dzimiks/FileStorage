@@ -1,6 +1,6 @@
 package dialogs;
 
-import listeners.CreateFileDialogCancelButtonListener;
+import listeners.DialogCancelButtonListener;
 import listeners.CreateFileDialogOkButtonListener;
 import views.MainView;
 
@@ -16,8 +16,10 @@ public class CreateFileDialog extends JDialog {
 	private JTextField tfFileName;
 	private JLabel filePath;
 	private JTextField tfFilePath;
+	private String implementation;
 
-	public CreateFileDialog() {
+	public CreateFileDialog(String implementation) {
+		this.implementation = implementation;
 		setLayout(null);
 		setResizable(false);
 		setTitle("Create new file");
@@ -32,7 +34,7 @@ public class CreateFileDialog extends JDialog {
 		filePath = new JLabel("Path:");
 		tfFilePath = new JTextField();
 
-		JButton btnOk = new JButton("Ok");
+		JButton btnOk = new JButton("OK");
 		JButton btnCancel = new JButton("Cancel");
 
 		fileName.setBounds(10, 10, 150, 25);
@@ -42,8 +44,8 @@ public class CreateFileDialog extends JDialog {
 		btnOk.setBounds(135, 100, 50, 25);
 		btnCancel.setBounds(195, 100, 80, 25);
 
-		btnOk.addActionListener(new CreateFileDialogOkButtonListener(this));
-		btnCancel.addActionListener(new CreateFileDialogCancelButtonListener(this));
+		btnOk.addActionListener(new CreateFileDialogOkButtonListener(this, implementation));
+		btnCancel.addActionListener(new DialogCancelButtonListener(this));
 
 		add(fileName);
 		add(tfFileName);
