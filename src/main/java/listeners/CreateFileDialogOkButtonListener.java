@@ -25,10 +25,11 @@ public class CreateFileDialogOkButtonListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String name = dialog.getTfFileName().trim().replace(" ", "-");
 		String path = dialog.getTfFilePath();
-		LocalFile localFile = new LocalFile();
+
 
 		if (implementation.equals("local")) {
 			try {
+				LocalFile localFile = new LocalFile();
 				// TODO: Handle exceptions if empty string etc.
 				if (name.equals("")) {
 					name = "new-local-file.txt";

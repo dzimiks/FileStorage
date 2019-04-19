@@ -1,6 +1,7 @@
 package views;
 
 import com.google.gson.Gson;
+import dialogs.CreateDirectoryDialog;
 import dialogs.CreateFileDialog;
 import listeners.CloseApplicationListener;
 import model.Student;
@@ -148,6 +149,11 @@ public class MainView extends JFrame {
 
 		btnCreateFile.addActionListener(e -> {
 			CreateFileDialog dialog = new CreateFileDialog(implementation);
+			dialog.setVisible(true);
+		});
+
+		btnCreateDir.addActionListener(e ->{
+			CreateDirectoryDialog dialog = new CreateDirectoryDialog(implementation);
 			dialog.setVisible(true);
 		});
 
