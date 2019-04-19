@@ -3,6 +3,7 @@ package listeners;
 import dialogs.DownloadFileDialog;
 import dropbox.models.DropboxDirectory;
 import dropbox.models.DropboxFile;
+import exceptions.DownloadException;
 import model.Student;
 import models.LocalFile;
 
@@ -45,7 +46,12 @@ public class DownloadFileOkBtnListener implements ActionListener {
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
 			DropboxFile dropboxFile = new DropboxFile(dropboxDirectory.getClient());
-			dropboxFile.download(src, dest);
+
+			try {
+				dropboxFile.download(src, dest);
+			} catch (DownloadException e1) {
+				e1.printStackTrace();
+			}
 		} else {
 			System.out.println("Error");
 		}

@@ -4,6 +4,7 @@ import dialogs.UploadDirDialog;
 import dialogs.UploadFileDialog;
 import dropbox.models.DropboxDirectory;
 import dropbox.models.DropboxFile;
+import exceptions.UploadException;
 import model.Student;
 import models.LocalDirectory;
 import models.LocalFile;
@@ -47,7 +48,12 @@ public class UploadFileOkBtnListener implements ActionListener {
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
 			DropboxFile dropboxFile = new DropboxFile(dropboxDirectory.getClient());
-			dropboxFile.upload(src, dest);
+
+			try {
+				dropboxFile.upload(src, dest);
+			} catch (UploadException e1) {
+				e1.printStackTrace();
+			}
 		} else {
 			System.out.println("Error");
 		}

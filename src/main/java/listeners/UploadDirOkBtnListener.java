@@ -3,6 +3,7 @@ package listeners;
 import dialogs.DownloadDirDialog;
 import dialogs.UploadDirDialog;
 import dropbox.models.DropboxDirectory;
+import exceptions.UploadException;
 import model.Student;
 import models.LocalDirectory;
 
@@ -45,7 +46,12 @@ public class UploadDirOkBtnListener implements ActionListener {
 			System.out.println("Dest: " + dest);
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
-			dropboxDirectory.upload(src, dest);
+
+			try {
+				dropboxDirectory.upload(src, dest);
+			} catch (UploadException e1) {
+				e1.printStackTrace();
+			}
 		} else {
 			System.out.println("Error");
 		}

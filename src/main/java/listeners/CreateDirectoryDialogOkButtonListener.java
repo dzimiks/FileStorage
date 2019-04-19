@@ -3,6 +3,7 @@ package listeners;
 import dialogs.CreateDirectoryDialog;
 import dialogs.CreateFileDialog;
 import dropbox.models.DropboxDirectory;
+import exceptions.CreateDirectoryException;
 import exceptions.CreateFileException;
 import model.Student;
 import models.LocalDirectory;
@@ -46,7 +47,12 @@ public class CreateDirectoryDialogOkButtonListener implements ActionListener {
 			}
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
-			dropboxDirectory.create(name, path);
+
+			try {
+				dropboxDirectory.create(name, path);
+			} catch (CreateDirectoryException e1) {
+				e1.printStackTrace();
+			}
 		} else {
 			System.out.println("Error");
 		}

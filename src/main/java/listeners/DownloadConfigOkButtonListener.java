@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import dialogs.DownloadConfigDialog;
 import dropbox.models.DropboxDirectory;
 import dropbox.models.DropboxFile;
+import exceptions.DownloadException;
+import exceptions.UploadException;
 import model.Student;
 import models.LocalFile;
 
@@ -47,13 +49,23 @@ public class DownloadConfigOkButtonListener implements ActionListener {
 
 		if (implementation.equals("local")) {
 			LocalFile localFile = new LocalFile();
-			localFile.upload(LOCAL_CONFIG_PATH, path + File.separator + "config.json");
+
+			try {
+				localFile.upload(LOCAL_CONFIG_PATH, path + File.separator + "config.json");
+			} catch (UploadException e1) {
+				e1.printStackTrace();
+			}
 
 			saveMeta(name, lastName, index, group, implementation, accessToken);
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
 			DropboxFile dropboxFile = new DropboxFile(dropboxDirectory.getClient());
-			dropboxFile.download(DROPBOX_CONFIG_PATH, path + File.separator + "config.json");
+
+			try {
+				dropboxFile.download(DROPBOX_CONFIG_PATH, path + File.separator + "config.json");
+			} catch (DownloadException e1) {
+				e1.printStackTrace();
+			}
 
 			saveMeta(name, lastName, index, group, implementation, accessToken);
 		} else {

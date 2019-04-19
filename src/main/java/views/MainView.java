@@ -3,6 +3,7 @@ package views;
 import com.google.gson.Gson;
 import dialogs.*;
 import dropbox.models.DropboxDirectory;
+import exceptions.ListFilesException;
 import listeners.CloseApplicationListener;
 import model.Student;
 import models.LocalDirectory;
@@ -24,7 +25,11 @@ public class MainView extends JFrame {
 	private Gson gson;
 
 	private MainView() {
-		init();
+		try {
+			init();
+		} catch (ListFilesException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static MainView getInstance() {
@@ -35,7 +40,7 @@ public class MainView extends JFrame {
 		return instance;
 	}
 
-	private void init() {
+	private void init() throws ListFilesException {
 		this.gson = new Gson();
 
 		try {
@@ -147,7 +152,7 @@ public class MainView extends JFrame {
 		}
 	}
 
-	private JComboBox generateComboBox(String implementation, String accessToken) {
+	private JComboBox generateComboBox(String implementation, String accessToken) throws ListFilesException {
 		JComboBox comboBox = new JComboBox();
 
 		if (implementation.equals("local")) {
@@ -173,7 +178,7 @@ public class MainView extends JFrame {
 		return comboBox;
 	}
 
-	private JComboBox generateComboBoxFiles(String implementation, String accessToken) {
+	private JComboBox generateComboBoxFiles(String implementation, String accessToken) throws ListFilesException {
 		JComboBox comboBox = new JComboBox();
 
 		if (implementation.equals("local")) {

@@ -35,7 +35,11 @@ public class CreateFileDialogOkButtonListener implements ActionListener {
 				name = "new-local-file.txt";
 			}
 
-			localFile.create(name, path);
+			try {
+				localFile.create(name, path);
+			} catch (CreateFileException e1) {
+				e1.printStackTrace();
+			}
 
 			System.out.println("=== Create file ===");
 			System.out.println("Name: " + name);

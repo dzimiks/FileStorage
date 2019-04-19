@@ -3,6 +3,7 @@ package listeners;
 import dialogs.DeleteDirDialog;
 import dialogs.DeleteFileDialog;
 import dropbox.models.DropboxDirectory;
+import exceptions.DeleteException;
 import model.Student;
 import models.LocalDirectory;
 import models.LocalFile;
@@ -44,7 +45,12 @@ public class DeleteFileDialogOkBtnListener implements ActionListener {
 			System.out.println("Path: " + path);
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
-			dropboxDirectory.delete(path);
+
+			try {
+				dropboxDirectory.delete(path);
+			} catch (DeleteException e1) {
+				e1.printStackTrace();
+			}
 		} else {
 			System.out.println("Error");
 		}

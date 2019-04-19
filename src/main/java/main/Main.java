@@ -3,7 +3,9 @@ package main;
 import com.google.gson.Gson;
 import dropbox.models.DropboxDirectory;
 import dropbox.models.DropboxFile;
+import exceptions.CreateDirectoryException;
 import exceptions.CreateFileException;
+import exceptions.UploadException;
 import model.Student;
 import models.LocalDirectory;
 import models.LocalFile;
@@ -64,7 +66,7 @@ public class Main {
 					System.out.println("Error");
 					break;
 			}
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException | UploadException | CreateDirectoryException | CreateFileException e) {
 			e.printStackTrace();
 		}
 	}
