@@ -1,6 +1,8 @@
 package listeners;
 
 import dialogs.DownloadConfigDialog;
+import dropbox.models.DropboxDirectory;
+import dropbox.models.DropboxFile;
 import model.Student;
 import models.LocalDirectory;
 import models.LocalFile;
@@ -18,6 +20,7 @@ public class DownloadConfigOkButtonListener implements ActionListener {
 	private DownloadConfigDialog dialog;
 	private Student student;
 	private final String LOCAL_CONFIG_PATH = "./config.json";
+	private final String DROPBOX_CONFIG_PATH = "/UUP2018-januar/config.json";
 
 	public DownloadConfigOkButtonListener(DownloadConfigDialog dialog, Student student) {
 		this.dialog = dialog;
@@ -37,12 +40,15 @@ public class DownloadConfigOkButtonListener implements ActionListener {
 		System.out.println("Name: " + name);
 		System.out.println("Last name: " + lastName);
 		System.out.println("Index: " + index);
+		System.out.println("Path: " + path);
 
 		if (implementation.equals("local")) {
 			LocalFile localFile = new LocalFile();
 			localFile.upload(LOCAL_CONFIG_PATH, path + File.separator + "config.json");
 		} else if (implementation.equals("dropbox")) {
-
+			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
+			DropboxFile dropboxFile = new DropboxFile(dropboxDirectory.getClient());
+			dropboxFile.download(DROPBOX_CONFIG_PATH, path + File.separator + "config.json");
 		} else {
 			System.out.println("Error");
 		}
