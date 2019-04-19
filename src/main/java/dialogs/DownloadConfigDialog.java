@@ -8,6 +8,7 @@ import views.MainView;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.util.Objects;
 
 /**
  * @author dzimiks
@@ -24,6 +25,7 @@ public class DownloadConfigDialog extends JDialog {
 	private JTextField path;
 	private JButton chooseFile;
 	private JFileChooser fileChooser;
+	private JComboBox comboBox;
 	private File readFromFile;
 	private Student student;
 
@@ -32,7 +34,7 @@ public class DownloadConfigDialog extends JDialog {
 		setLayout(null);
 		setResizable(false);
 		setTitle("Load config");
-		setSize(400, 250);
+		setSize(400, 280);
 		setLocationRelativeTo(MainView.getInstance());
 		init();
 	}
@@ -71,6 +73,12 @@ public class DownloadConfigDialog extends JDialog {
 			}
 		});
 
+		comboBox = new JComboBox();
+
+		for (int i = 301; i < 311; i++) {
+			comboBox.addItem(i);
+		}
+
 		firstName.setBounds(10, 10, 150, 25);
 		tfFirstName.setBounds(180, 10, 190, 25);
 		lastName.setBounds(10, 50, 150, 25);
@@ -79,8 +87,9 @@ public class DownloadConfigDialog extends JDialog {
 		tfIndex.setBounds(180, 90, 190, 25);
 		path.setBounds(10, 130, 250, 25);
 		chooseFile.setBounds(270, 130, 100, 25);
-		btnOk.setBounds(120, 170, 70, 25);
-		btnCancel.setBounds(180, 170, 80, 25);
+		comboBox.setBounds(10, 170, 130, 25);
+		btnOk.setBounds(120, 210, 70, 25);
+		btnCancel.setBounds(180, 210, 80, 25);
 
 		btnOk.addActionListener(new DownloadConfigOkButtonListener(this, student));
 		btnCancel.addActionListener(new DialogCancelButtonListener(this));
@@ -93,6 +102,7 @@ public class DownloadConfigDialog extends JDialog {
 		add(tfIndex);
 		add(path);
 		add(chooseFile);
+		add(comboBox);
 		add(btnOk);
 		add(btnCancel);
 	}
@@ -175,5 +185,17 @@ public class DownloadConfigDialog extends JDialog {
 
 	public void setPath(String path) {
 		this.path.setText(path);
+	}
+
+	public String getComboBoxItem() {
+		return String.valueOf(comboBox.getSelectedItem());
+	}
+
+	public void addComboBoxItem(Object item) {
+		this.comboBox.addItem(item);
+	}
+
+	public void setSelectedComboBoxItem(Object item) {
+		this.comboBox.setSelectedItem(item);
 	}
 }

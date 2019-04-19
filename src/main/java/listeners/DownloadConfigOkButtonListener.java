@@ -1,15 +1,16 @@
 package listeners;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dialogs.DownloadConfigDialog;
 import dropbox.models.DropboxDirectory;
 import dropbox.models.DropboxFile;
 import model.Student;
-import models.LocalDirectory;
 import models.LocalFile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 
 /**
  * @author dzimiks
@@ -35,24 +36,44 @@ public class DownloadConfigOkButtonListener implements ActionListener {
 		String lastName = dialog.getTfLastName();
 		String index = dialog.getTfIndex();
 		String path = dialog.getPath();
+		String group = dialog.getComboBoxItem();
 
 		System.out.println("=== Download config ===");
 		System.out.println("Name: " + name);
 		System.out.println("Last name: " + lastName);
 		System.out.println("Index: " + index);
 		System.out.println("Path: " + path);
+		System.out.println("Group: " + group);
 
 		if (implementation.equals("local")) {
 			LocalFile localFile = new LocalFile();
 			localFile.upload(LOCAL_CONFIG_PATH, path + File.separator + "config.json");
+
+			saveMeta(name, lastName, index, group, implementation, accessToken);
 		} else if (implementation.equals("dropbox")) {
 			DropboxDirectory dropboxDirectory = new DropboxDirectory(accessToken);
 			DropboxFile dropboxFile = new DropboxFile(dropboxDirectory.getClient());
 			dropboxFile.download(DROPBOX_CONFIG_PATH, path + File.separator + "config.json");
+
+			saveMeta(name, lastName, index, group, implementation, accessToken);
 		} else {
 			System.out.println("Error");
 		}
 
 		this.dialog.setVisible(false);
+	}
+
+	private void saveMeta(String name, String lastName, String index, String group, String implementation, String accessToken) {
+		try {
+			FileOutputStream writer = new FileOutputStream("meta.json");
+			OutputStreamWriter out = new OutputStreamWriter(writer);
+			Student s = new Student(name, lastName, index, group, implementation, accessToken);
+			Gson gson = new Gson();
+			out.append(gson.toJson(s));
+			out.close();
+			writer.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 }
