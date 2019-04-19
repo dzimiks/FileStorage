@@ -11,6 +11,9 @@ import models.LocalFile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Delete file button listener.
+ */
 public class DeleteFileDialogOkBtnListener implements ActionListener {
 	private DeleteFileDialog dialog;
 	private String implementation;

@@ -10,6 +10,9 @@ import models.LocalDirectory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Directory download button listener.
+ */
 public class DownloadDirOkBtnListener implements ActionListener {
 	private DownloadDirDialog dialog;
 	private Student student;

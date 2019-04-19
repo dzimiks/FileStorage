@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Upload file button listener.
+ */
 public class UploadFilesOkBtnListener implements ActionListener {
 	private UploadFilesDialog dialog;
 	private Student student;

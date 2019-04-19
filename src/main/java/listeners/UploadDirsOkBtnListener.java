@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Upload directory button listener.
+ */
 public class UploadDirsOkBtnListener implements ActionListener {
 	private UploadDirsDialog dialog;
 	private Student student;

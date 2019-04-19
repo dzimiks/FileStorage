@@ -8,6 +8,9 @@ import views.MainView;
 
 import javax.swing.*;
 
+/**
+ * Dialog for downloading file.
+ */
 public class DownloadFileDialog extends JDialog {
     private JLabel dirSource;
     private JTextField tfDirSource;

@@ -12,6 +12,9 @@ import models.LocalFile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Create directory button listener.
+ */
 public class CreateDirectoryDialogOkButtonListener implements ActionListener {
 
 	private CreateDirectoryDialog dialog;

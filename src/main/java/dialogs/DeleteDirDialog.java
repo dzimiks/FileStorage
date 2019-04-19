@@ -7,6 +7,9 @@ import views.MainView;
 
 import javax.swing.*;
 
+/**
+ * Dialog for deleting directory.
+ */
 public class DeleteDirDialog extends JDialog {
     private JLabel fileName;
     private JTextField tfFileName;
